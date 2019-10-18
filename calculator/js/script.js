@@ -108,7 +108,7 @@ let sum = document.getElementById('sum');
 
 sum.addEventListener('click', (event) => {
     tableResult.style.display = "table";
-    titleText.style.display = "none";
+    titleText.style.visibility = "hidden";
     result.forEach((value, index) => { 
         if(index%2 == 0){
             if(index == 0){
