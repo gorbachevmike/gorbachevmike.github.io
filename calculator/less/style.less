@@ -1,5 +1,7 @@
 @import 'fonts.less';
-
+a{
+    color: #000;
+}
   
 html, body{
     padding: 0;
@@ -31,6 +33,10 @@ header{
 .button{
     justify-content: flex-end;
 }
+.active{
+    background-color: #000;
+    color: #fff;  
+}
 .content{
     &__title{
         text-align: center;
@@ -41,7 +47,7 @@ header{
     }
     &__form{
         border: 2px solid #000000;
-        background-color: #f5f5f585;
+        background-color: #f5f5f595;
         margin-bottom: 50px;
     }
     &__result{
@@ -186,7 +192,6 @@ header{
     &__item{
         list-style-type: none;
         &-link{
-            color: #000000;
             text-decoration: none;
             font-weight: 500;
             font-size: 18px;
