@@ -106,6 +106,61 @@ tableResult.style.display = "none";
 
 let sum = document.getElementById('sum');
 
+var city = [];
+var cityLL = [];
+var xhttp = new XMLHttpRequest();
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var jsonResponse = JSON.parse(this.responseText);
+        for(let i = 0; i < jsonResponse.length; i++){
+            //console.log(jsonResponse[i]);
+            city.push(jsonResponse[i].Город);
+            cityLL.push({"city":jsonResponse[i].Город, "lat": jsonResponse[i].Широта,'lon': jsonResponse[i].Долгота});
+        }
+    }
+};
+
+new autoComplete({
+    selector: 'input[name="city"]',
+    minChars: 2,
+    source: function(term, suggest){
+        term = term.toLowerCase();
+        var choices = city;
+        var matches = [];
+        for (let i=0; i<choices.length; i++)
+            if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+        suggest(matches);
+    }
+});
+
+let elementCity = document.getElementById('city');
+var lat = 0;
+var lon = 0;
+
+elementCity.addEventListener('change', (event) => {
+    var ch = cityLL;
+    for(let i=0; i<ch.length; i++){
+        if(ch[i].city == event.srcElement.value){
+            lat = ch[i].lat;
+            lon = ch[i].lon;
+        }
+    }
+});
+
+
+xhttp.open("GET", "https://aleksandrowmike.github.io/calculator/city.json", true);
+xhttp.send();
+
+ymaps.ready(init);
+
+function init(){
+        // Создание карты.
+        var myMap = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 10
+        });
+     
 sum.addEventListener('click', (event) => {
     tableResult.style.display = "table";
     titleText.style.visibility = "hidden";
@@ -124,17 +179,24 @@ sum.addEventListener('click', (event) => {
             theHours.setHours(h);
             value.innerHTML =  theHours.getHours() + ":00";
         }
-       
     });
+
+    var myPlacemark = new ymaps.GeoObject({
+        geometry: {
+            type: "Point",
+            coordinates: [lat, lon]
+        }
+    });
+
+    document.getElementById('lat').value = lat;
+    document.getElementById('lon').value = lon;
+    myMap.geoObjects.add(myPlacemark);
+    myMap.setCenter(myPlacemark.geometry.getCoordinates());
 });
 
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-    }
-};
-xhttp.open("GET", "city.json", true);
-xhttp.send();
 
+        
+}
 
+    
+    

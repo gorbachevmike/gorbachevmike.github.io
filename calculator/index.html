@@ -7,6 +7,9 @@
     <title>Калькуляторы и календари</title>
     <link rel="stylesheet" href="less/style.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/auto-complete.css">
+    <script src="https://api-maps.yandex.ru/2.0-stable/?load=package.full&apikey=c0c1469b-41f4-40f3-8d8b-d130af254ddc&lang=ru-RU" type="text/javascript"></script>
+    </script>
 </head>
 <body>
     <div class="container">
@@ -35,7 +38,11 @@
                         <div class="row">
 
                             <div class="col-lg-3">
-
+                                <div id="map" class="map"></div>
+                                <div class="coordinates">
+                                    <input type="text" class="form__inline-input" id="lat" value="55.76">
+                                    <input type="text" class="form__inline-input" id="lon" value="37.64">
+                                </div>
                             </div>
 
                             <div class="col-lg-9">
@@ -93,7 +100,7 @@
                                     <div class="form__inline" id="placeBorn">
                                             <div class="form__inline-born">
                                                 <label for="" class="form__inline-label nowrap">Место рождения</label>
-                                                <input type="text" class="form__inline-input" placeholder="Населенный пункт">
+                                                <input type="text" class="form__inline-input" placeholder="Населенный пункт" name="city" id="city">
                                             </div>
                                             <div class="form__inline-sns">
                                                     <select class="form__inline-select" id="utc">
@@ -275,6 +282,8 @@
         </div>
 
     </div>
+    <script src="js/auto-complete.min.js"></script>
     <script src="js/script.js"></script>
+
 </body>
 </html>
