@@ -165,48 +165,65 @@ xhttp.send();
 ymaps.ready(init);
 
 function init(){
-        // Создание карты.
-        var myMap = new ymaps.Map("map", {
-            center: [lat, lon],
-            zoom: 10
-        });
-     
-sum.addEventListener('click', (event) => {
-    tableResult.style.display = "table";
-    titleText.style.visibility = "hidden";
-    result.forEach((value, index) => { 
-        if(index%2 == 0){
-            if(index == 0){
-                let hour = Number(elementUtc.options[elementUtc.selectedIndex].value);
-                value.innerHTML = Math.abs(hour) + ":00" ;
-            }else{
-                let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value);
-                theHours.setHours(h);
-                value.innerHTML = theHours.getHours() + ":00";
-            }
-        }else{
-            let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value);
-            theHours.setHours(h);
-            value.innerHTML =  theHours.getHours() + ":00";
-        }
+            
+navigator.geolocation.getCurrentPosition(function(location) {
+      // Создание карты.
+      var myMap = new ymaps.Map("map", {
+        center: [location.coords.latitude, location.coords.longitude],
+        zoom: 10
     });
+
+    document.getElementById('lat').value = location.coords.latitude;
+    document.getElementById('lon').value = location.coords.longitude;
 
     var myPlacemark = new ymaps.GeoObject({
         geometry: {
             type: "Point",
-            coordinates: [lat, lon]
+            coordinates: [location.coords.latitude, location.coords.longitude]
         }
     });
 
-    document.getElementById('lat').value = lat;
-    document.getElementById('lon').value = lon;
     myMap.geoObjects.add(myPlacemark);
-    myMap.setCenter(myPlacemark.geometry.getCoordinates());
+
+    sum.addEventListener('click', (event) => {
+        tableResult.style.display = "table";
+        titleText.style.visibility = "hidden";
+        result.forEach((value, index) => { 
+            if(index%2 == 0){
+                if(index == 0){
+                    let hour = Number(elementUtc.options[elementUtc.selectedIndex].value);
+                    value.innerHTML = Math.abs(hour) + ":00" ;
+                }else{
+                    let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value);
+                    theHours.setHours(h);
+                    value.innerHTML = theHours.getHours() + ":00";
+                }
+            }else{
+                let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value);
+                theHours.setHours(h);
+                value.innerHTML =  theHours.getHours() + ":00";
+            }
+        });
+    
+        var myPlacemark = new ymaps.GeoObject({
+            geometry: {
+                type: "Point",
+                coordinates: [lat, lon]
+            }
+        });
+    
+        document.getElementById('lat').value = lat;
+        document.getElementById('lon').value = lon;
+        myMap.geoObjects.add(myPlacemark);
+        myMap.setCenter(myPlacemark.geometry.getCoordinates());
+    });
+    
+
 });
+
+      
 
 
         
 }
 
-    
-    
