@@ -100,7 +100,7 @@
                                     <div class="form__inline" id="placeBorn">
                                             <div class="form__inline-born">
                                                 <label for="" class="form__inline-label nowrap">Место рождения</label>
-                                                <input type="text" class="form__inline-input" placeholder="Населенный пункт" name="city" id="city">
+                                                <input type="text" class="form__inline-input" placeholder="Населенный пункт" name="city" id="city" required>
                                             </div>
                                             <div class="form__inline-sns">
                                                     <select class="form__inline-select" id="utc">
@@ -115,10 +115,8 @@
                                             </div>
                                     </div>
 
-                                    <div class="form__inline button">
-                                        <button class="form__inline-button" id="sum">
-                                            рассчитать
-                                        </button>
+                                    <div class="form__inline buttons">
+                                        <div class="form__inline-button button" id="sum"><span>рассчитать</span></div>
                                     </div>
                                 </form>
                             </div>
@@ -126,18 +124,22 @@
                     </div>
                 <div class="col-lg-12">
                     <div class="content__result">
+
+
+
                         <table class="content__result-table" id="tableResult">
                             <tr>
-                                <td>Крыса (ран.)</td>
-                                <td>子</td>
-                                <td><svg 
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="0.25in" height="0.181in">
-                                   <image  x="0px" y="0px" width="18px" height="13px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAANCAQAAAAOR/aSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfjChIJMBFWg2m3AAABhUlEQVQY012Mv0sbYQCGn+/uvFzOSzTtiaaa0EEltsSiICK2CoUuakdpN2kpHbp2EJzcXTq2f0CHQieXOggOTjoIoiD+bGr0EqsXvTTmPGP4HCJC84wvz/OKd4lMyou2iLLzuGPl46cPscwGDpc4jNGHAki07OzSewBYpj2veS4GGlptQiABdVjmnpebapN9Eqwt28qEM+qbIt9504oABGKK4+H8zObYXeo9qjg2NPltP99MD+Rk7amXq+zIgm7/7gfA+GcCBA3us0rn4K/GQEFDTXNGl5842pkoRfmPbKp1p7ye4wR1kiRhHp4e92XT1OHG49+DyiWKxQN05M2T+ZZivfQ3bcTDNKJEsIgQ4uWP7kW9TroOH/Vv4aM+pcAFBTy2XyV3fbsM924VL2n9STrqOAYGBlYiN/lizu3p/XY+pBtRJCEEQcfZ65Cple6qK735q1uMfEktlA69yGllVOrCUmVx7+38Z81GIBHo+wf7PuZWprv9nOvtmDQ9sxrye6ptqdVbhCaKP3Q0ThkAAAAASUVORK5CYII=" />
-                                   </svg></td>
-                                <td id="tableTime"></td>
-
+                                <div class="one">
+                                        <td>Крыса (ран.)</td>
+                                        <td>子</td>
+                                        <td><svg 
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="0.25in" height="0.181in">
+                                           <image  x="0px" y="0px" width="18px" height="13px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAANCAQAAAAOR/aSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfjChIJMBFWg2m3AAABhUlEQVQY012Mv0sbYQCGn+/uvFzOSzTtiaaa0EEltsSiICK2CoUuakdpN2kpHbp2EJzcXTq2f0CHQieXOggOTjoIoiD+bGr0EqsXvTTmPGP4HCJC84wvz/OKd4lMyou2iLLzuGPl46cPscwGDpc4jNGHAki07OzSewBYpj2veS4GGlptQiABdVjmnpebapN9Eqwt28qEM+qbIt9504oABGKK4+H8zObYXeo9qjg2NPltP99MD+Rk7amXq+zIgm7/7gfA+GcCBA3us0rn4K/GQEFDTXNGl5842pkoRfmPbKp1p7ye4wR1kiRhHp4e92XT1OHG49+DyiWKxQN05M2T+ZZivfQ3bcTDNKJEsIgQ4uWP7kW9TroOH/Vv4aM+pcAFBTy2XyV3fbsM924VL2n9STrqOAYGBlYiN/lizu3p/XY+pBtRJCEEQcfZ65Cple6qK735q1uMfEktlA69yGllVOrCUmVx7+38Z81GIBHo+wf7PuZWprv9nOvtmDQ9sxrye6ptqdVbhCaKP3Q0ThkAAAAASUVORK5CYII=" />
+                                           </svg></td>
+                                        <td id="tableTime"></td>
+                                </div>
                                 <td>Коза</td>
                                 <td>未</td>
                                 <td><svg 

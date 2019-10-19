@@ -6,6 +6,7 @@ a{
 html, body{
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 body{
@@ -44,7 +45,7 @@ header{
         width: 100px !important;
     }
 }
-.button{
+.buttons{
     justify-content: flex-end;
 }
 .active{
@@ -66,6 +67,8 @@ header{
     }
     &__result{
         margin-bottom: 50px;
+        display: flex;
+        flex-wrap: wrap;
         &-title{
             text-transform: uppercase;
             font-weight: 500;
@@ -122,26 +125,26 @@ header{
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            &-button{
-                background-color: transparent;
-                border: 1px solid #bf2738;
-                font-size: 16px;
-                color: #bf2738;
-                text-transform: uppercase;
-                font-weight: 400;
-                padding: 10px;
-                position: relative;
-                cursor: pointer;
-                &:after{
-                    content: "";
-                    position: absolute;
-                    width: 110%;
-                    height: 90%;
-                    border: 1px solid #bf2738;
-                    top: 2px;
-                    left: -6px;
-                }
-            }
+            // &-button{
+            //     background-color: transparent;
+            //     border: 1px solid #bf2738;
+            //     font-size: 16px;
+            //     color: #bf2738;
+            //     text-transform: uppercase;
+            //     font-weight: 400;
+            //     padding: 10px;
+            //     position: relative;
+            //     cursor: pointer;
+            //     &:after{
+            //         content: "";
+            //         position: absolute;
+            //         width: 110%;
+            //         height: 90%;
+            //         border: 1px solid #bf2738;
+            //         top: 2px;
+            //         left: -6px;
+            //     }
+            // }
             &-floor, &-born, &-sns, &-birthday, &-time, &-name{
                 display: flex;
                 align-items: center;
@@ -217,4 +220,115 @@ header{
             }
         }
     }
+}
+.item{
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    tr{
+        td:nth-child(3), td:nth-child(7){
+            display: none;
+        }
+    }
+    
+    td{
+        padding: 2px !important;
+        font-size: 14px !important;
+    }
+	
+}
+.button,
+.button::before,
+.button::after,
+.button span,
+.button span::before,
+.button span::after
+{
+  transition: all ease .5s;
+}
+
+.button{
+  position: relative;
+  display: inline-block;
+  padding: 0.3em;
+  margin: 1em;
+  border: solid 1px #bf2738;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button:hover
+{
+  box-shadow: 0 0 5em .5em rgba(50,50,150,0.5);
+}
+
+.button span
+{
+  display: inline-block;
+  width: 100%;
+  padding: 0.3em 2em;
+}
+
+.button:hover span
+{
+  background-color: #fff;
+  color: #112;
+}
+
+.button::before,
+.button::after,
+.button span::before,
+.button span::after
+{
+  content: '';
+  position: absolute;
+  border: 1px solid #bf2738;
+}
+
+.button::before,
+.button span::before
+{
+  border-style: solid none;  
+}
+
+.button::before,
+.button span::after{      
+  left: 0;
+  top: -0.4em;
+  width: 100%; 
+  height: calc(100% + 0.8em);
+}
+
+.button::after,
+.button span::after
+{
+  border-style: none solid;   
+}
+
+.button::after,
+.button span::before
+{
+  top: 0;
+  left: -0.4em;
+  height: 100%;
+  width: calc(100% + 0.8em); 
+}
+
+.button:hover::after,
+.button:hover span::after
+{
+  transform: scaleY(0);
+}
+
+.button:hover::before,
+.button:hover span::before
+{
+  transform: scaleX(0);
+}
+
+.button:hover span::after,
+.button:hover span::before
+{
+  opacity: 0;
 }

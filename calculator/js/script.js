@@ -172,7 +172,8 @@ navigator.geolocation.getCurrentPosition(function(location) {
         center: [location.coords.latitude, location.coords.longitude],
         zoom: 10
     });
-
+    lat = location.coords.latitude;
+    lon = location.coords.longitude;
     document.getElementById('lat').value = location.coords.latitude;
     document.getElementById('lon').value = location.coords.longitude;
 
