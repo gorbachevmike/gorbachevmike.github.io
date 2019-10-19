@@ -33,12 +33,22 @@ let elementMinutes =  document.getElementById('minutes');
 
 utc().forEach((value, index) => {
     let option = document.createElement('option');
-    if(value == 0){
+    if(value == 3){
         option.selected = true;
     }
-    option.text = "UTC " + value;
-    option.value = value;
+    if(value > 0){
+        option.text = "UTC +" + value;
+        option.value = value;
+          
     elementUtc.add(option);
+    }else{
+        option.text = "UTC " + value;
+        option.value = value;
+          
+    elementUtc.add(option);
+    }
+
+  
 });
 
 mounth.forEach((value, index) => {
@@ -135,8 +145,8 @@ new autoComplete({
 });
 
 let elementCity = document.getElementById('city');
-var lat = 0;
-var lon = 0;
+var lat = 55.76;
+var lon = 37.64;
 
 elementCity.addEventListener('change', (event) => {
     var ch = cityLL;
@@ -157,7 +167,7 @@ ymaps.ready(init);
 function init(){
         // Создание карты.
         var myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
+            center: [lat, lon],
             zoom: 10
         });
      
