@@ -10,7 +10,7 @@ html, body{
 }
 
 body{
-    background-image: url(../img/bg.jpg);
+    background-image: url(../img/bg1.jpg);
     background-color: #f5f5f5;
     width: 100%;
     background-size: cover;
@@ -26,7 +26,10 @@ header{
 .body__title{
     font-size: 52px;
     text-transform: uppercase;
-    @media screen and (max-width: 768px) {
+
+    @media screen and (max-width: 1200px) { font-size: 45px;}
+
+    @media screen and (max-width: 425px) {
         font-size: 32px;
         text-align: center;
     }
@@ -35,6 +38,7 @@ header{
     margin-top: 40px;
     height: 200px;
     width: 100%;
+    overflow: hidden;
 }
 .coordinates{
     display: flex;
@@ -45,6 +49,12 @@ header{
         width: 100px !important;
     }
 }
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
 .buttons{
     justify-content: flex-end;
 }
@@ -53,6 +63,33 @@ header{
     color: #fff;  
 }
 .content{
+    &__menu{
+        display: none;
+        flex-wrap: wrap;
+        padding-left: 0;
+        padding-top: 22px;
+        margin: 0;
+        &-item{
+            list-style-type: none;
+            margin-bottom: 20px;
+            border: 1px solid #000;
+            margin-right: 5px;
+            &-link{
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 16px;
+                width: 100%;
+                height: 100%;
+                padding: 5px;
+                display: block;
+                cursor: pointer;
+                &:hover{
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
+        }
+    }
     &__title{
         text-align: center;
         font-weight: 500;
@@ -76,33 +113,9 @@ header{
             font-size: 23px;
             margin-top: 0;
         }
-        &-table{
-            border: 1px solid #000;
-            width: 100%;
-            padding: 0;
-            margin: 0px;
-            border-spacing: 0;
-            border-bottom: none;
-            border-right: none;
-            td{
-                border-right: 1px solid #000;
-                border-bottom: 1px solid #000;
-                margin: 0;
-                padding: 5px; 
-                font-weight: 500;
-                text-align: center;
-                font-size: 16px;
-                vertical-align: middle;
-                svg{
-                    vertical-align: middle;
-                    margin-bottom: 1px;
-                }
-            
-            }
-        }
     }
     .form{
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 425px) {
             padding: 10px;
             &__inline{
                 flex-direction: column;
@@ -154,6 +167,8 @@ header{
             }
             &-time{
                 margin-left: 10px;
+                @media screen and (max-width: 1200px) { flex-wrap: wrap;}
+               
                 &-label{
                     font-size: 12px;
                     font-weight: 500;
@@ -199,6 +214,7 @@ header{
 }
 .menu{
     display: flex;
+    flex-wrap: wrap;
     @media screen and (max-width: 768px) {
         flex-direction: column;
         &__item{
@@ -208,6 +224,7 @@ header{
 
     &__item{
         list-style-type: none;
+        margin-bottom: 20px;
         &-link{
             text-decoration: none;
             font-weight: 500;
@@ -331,4 +348,80 @@ header{
 .button:hover span::before
 {
   opacity: 0;
+}
+.table{
+    width: 100%;
+    
+
+    &__item{
+        border-top: 1px solid #000;
+        height: 30px;
+        display: flex;
+        &-name,&-symbol,&-svg,&-time,&-time_two{
+            display: flex;
+            height: 100%;
+            border-right: 1px solid;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 16px;
+            text-align: center;
+            @media screen and (max-width: 425px) { 
+               font-size: 12px;
+            }
+        }
+        &-name, &-time,&-time_two{
+            flex-basis: 33.5%;
+        }
+        &-symbol,&-svg{
+            @media screen and (max-width: 425px) {
+                flex-basis: 14.5%;
+            }
+            flex-basis: 8%;
+            font-family: "KozGoPr6N";
+            font-weight: bolder;
+        }
+    }
+    .col-lg-6{
+
+        @media screen and (max-width: 1024px) {
+            &:nth-child(even){
+                .table__item{
+                    border-left: 1px solid #000;  
+                }
+            }
+        }
+
+        &:nth-child(odd){
+            .table__item{
+                border-left: 1px solid #000;  
+            }
+        }
+
+        &:nth-child(2n){
+            .table__item{
+                @media screen and (max-width: 1024px) {
+                            border-right: none ;
+                }
+                //border-bottom: 1px solid #000;
+                //border-right: 1px solid #000;
+            }
+        }
+        &:nth-child(12){
+            .table__item{
+                border-bottom: 1px solid #000;
+                //border-right: 1px solid #000;
+            }
+        }
+        &:last-child{
+            .table__item{
+                @media screen and (max-width: 1024px) {
+                    border-right: none ;
+                    border-top: none;
+        }
+                border-bottom: 1px solid #000;
+                //border-right: 1px solid #000;
+            }
+        }
+    }
 }

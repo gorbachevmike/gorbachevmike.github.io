@@ -1,4 +1,10 @@
 @font-face {
+  font-family: 'KozGoPr6N';
+  src: url('../fonts/KozGoPr6N-Bold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
   font-family: 'Geometria';
   src: url('../fonts/Geometria-Thin.eot');
   src: local('../fonts/Geometria Thin'), local('../fonts/Geometria-Thin'), url('../fonts/Geometria-Thin.eot?#iefix') format('embedded-opentype'), url('../fonts/Geometria-Thin.woff') format('woff'), url('../fonts/Geometria-Thin.ttf') format('truetype');
