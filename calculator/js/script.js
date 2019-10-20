@@ -209,7 +209,7 @@ var lon = 37.64;
 var city = '';
 
 var elementCity = document.getElementById('city');
-
+var coordinates = [];
 
 
 ymaps.ready(init);
@@ -223,41 +223,68 @@ navigator.geolocation.getCurrentPosition(function(location) {
         zoom: 10
     });
 
+    coordinates = [location.coords.latitude, location.coords.longitude];
+
     sum.addEventListener('click', (event) => {
         tableResult.style.display = "block";
         titleText.style.display = "none";
         elementMenuItem.style.display = 'flex';
+
         result.forEach((value, index) => { 
             if(index%2 == 0){
                 if(index == 0){
-                    let hour = Number(elementUtc.options[elementUtc.selectedIndex].value);
-                    value.innerHTML = Math.abs(hour) + ":00" ;
+                    let hour = Number(elementUtc.options[elementUtc.selectedIndex].value) - 3;
+                    let m = 180 - (location.coords.longitude*4);
+                    theHours.setHours(hour);
+                    theHours.setMinutes(m);
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
                 }else{
-                    let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value);
+                    let h = (index - 2 + sunDay) - 1 + (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3);
+                    let m = 180 - (location.coords.longitude*4);
                     theHours.setHours(h);
-                    value.innerHTML = theHours.getHours() + ":00";
+                    theHours.setMinutes(m);
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
                 }
             }else{
-                let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value);
+                let h = (index + sunDay) + 10 + (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3);
+                let m = 180 - (location.coords.longitude*4);
                 theHours.setHours(h);
-                value.innerHTML =  theHours.getHours() + ":00";
+                theHours.setMinutes(m);
+                value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
+
             }
         });
 
         result2.forEach((value, index) => { 
             if(index%2 == 0){
                 if(index == 0){
-                    let hour = Number(elementUtc.options[elementUtc.selectedIndex].value) + 1;
-                    value.innerHTML = Math.abs(hour) + ":00" ;
+                    let hour = (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3) + 1;
+                    let m = 180 - (location.coords.longitude*4);
+                    theHours.setHours(hour);
+                    theHours.setMinutes(m);
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
                 }else{
-                    let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value) + 2;
+                    let h = (index - 2 + sunDay) - 1 + (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3) + 2;
+                    let m = 180 - (location.coords.longitude*4);
+                    theHours.setMinutes(m);
                     theHours.setHours(h);
-                    value.innerHTML = theHours.getHours() + ":00";
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
                 }
             }else{
-                let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value) + 2;
-                theHours.setHours(h);
-                value.innerHTML =  theHours.getHours() + ":00";
+                if(index == 11){
+                    let h = (index + sunDay) + 10 + (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3) + 1;
+                    let m = 180 - (location.coords.longitude*4);
+                    theHours.setHours(h);
+                    theHours.setMinutes(m);
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
+                }else{
+                    let h = (index + sunDay) + 10 + (Number(elementUtc.options[elementUtc.selectedIndex].value) - 3) + 2;
+                    let m = 180 - (location.coords.longitude*4);
+                    theHours.setHours(h);
+                    theHours.setMinutes(m);
+                    value.innerHTML = (theHours.getHours()<10?'0':'') + theHours.getHours() + ":" + (theHours.getMinutes()<10?'0':'') + theHours.getMinutes();
+                }
+                
             }
         });
 
@@ -317,7 +344,7 @@ navigator.geolocation.getCurrentPosition(function(location) {
         var myGeocoder = ymaps.geocode(elementCity.value);
         myGeocoder.then(
             function (res) {
-                var coordinates = res.geoObjects.get(0).geometry.getCoordinates();
+                coordinates = res.geoObjects.get(0).geometry.getCoordinates();
                 var myPlacemark = new ymaps.GeoObject({
                     geometry: {
                         type: "Point",
