@@ -435,6 +435,7 @@ header {
 }
 .table {
   width: 100%;
+  display: none;
 }
 .table__item {
   border-top: 1px solid #000;
