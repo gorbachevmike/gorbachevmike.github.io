@@ -20,6 +20,9 @@ body{
 .nowrap{
     white-space: nowrap;
 }
+.hidden{
+    display: none;
+}
 header{
     margin-bottom: 50px;
 }
@@ -115,7 +118,7 @@ header{
         }
     }
     .form{
-        @media screen and (max-width: 425px) {
+        @media screen and (max-width: 768px) {
             padding: 10px;
             &__inline{
                 flex-direction: column;
@@ -124,6 +127,7 @@ header{
                 }
                 &-birthday{
                     flex-direction: column;
+                    flex-wrap: wrap;
                     &-day{
                         margin-top: 10px;
                         margin-bottom: 10px;

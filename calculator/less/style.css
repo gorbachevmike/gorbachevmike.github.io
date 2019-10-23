@@ -136,6 +136,9 @@ body {
 .nowrap {
   white-space: nowrap;
 }
+.hidden {
+  display: none;
+}
 header {
   margin-bottom: 50px;
 }
@@ -236,7 +239,7 @@ header {
 .content .form {
   padding: 40px;
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
   .content .form {
     padding: 10px;
   }
@@ -253,6 +256,7 @@ header {
   }
   .content .form__inline-birthday {
     flex-direction: column;
+    flex-wrap: wrap;
   }
   .content .form__inline-birthday-day {
     margin-top: 10px;

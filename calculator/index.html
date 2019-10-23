@@ -49,7 +49,7 @@
 
                             <div class="col-lg-9">
                                 <form action="javascript:void(0);" class="form">
-                                    <div class="form__inline name-floor">
+                                    <div class="form__inline name-floor" style="display: none;">
                                         <div class="form__inline-name">
                                             <label for="" class="form__inline-label">Ф.И.О</label>
                                             <input type="text" class="form__inline-input">
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="form__inline">
                                             <div class="form__inline-birthday">
-                                                <label for="" class="form__inline-label nowrap">Дата рождения</label>
+                                                <label for="" class="form__inline-label nowrap">Дата: </label>
                                                 <div class="form__inline-birthday-day">
                                                     <select class="form__inline-select" id="day">
                                                                 <option selected>День</option>
@@ -88,7 +88,7 @@
                                                                 
                                                     </div>
                                             </div>
-                                            <div class="form__inline-time">
+                                            <div class="form__inline-time" style="display: none;">
                                                     <div class="form__inline-check">
                                                         <input class="form__inline-radio" type="checkbox" checked id="sunTime">
                                                         <label class="form__inline-time-label">Местное солнечное время</label>
@@ -101,19 +101,19 @@
                                     </div>
                                     <div class="form__inline" id="placeBorn">
                                             <div class="form__inline-born">
-                                                <label for="" class="form__inline-label nowrap">Место рождения</label>
+                                                <label for="" class="form__inline-label nowrap">Город: </label>
                                                 <input type="text" class="form__inline-input" placeholder="Населенный пункт" name="city" id="city" required>
                                             </div>
                                             <div class="form__inline-sns">
                                                     <select class="form__inline-select" id="utc">
                                                     </select>
-                                                    <div class="form__inline-sns-check">
+                                                    <div class="form__inline-sns-check" style="display: none;">
                                                             <label class="form__inline-label">СНС:</label>
                                                             <select class="form__inline-select">
                                                                     <option selected>Классические</option>
                                                                     <option value="1">Сдвоенный</option>
                                                             </select>
-                                                        </div>
+                                                    </div>
                                             </div>
                                     </div>
 
