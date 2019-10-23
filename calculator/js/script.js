@@ -301,12 +301,16 @@ function calcRubberStartTime(data, latitude, longitude, midnight = 0, noon = 12)
         incKMinutes = Math.trunc(Math.abs(incKMinutes*100));
     }
 
-   
-
     data.forEach((value, index) => { 
         switch (index) {
+            case 0: 
+            let rats = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 5*3600 + 15*Math.abs(incK);
+            rats = secondToHours(rats,incKMinutes);
+            let ratsHours = +rats.hours + 1;
+            value.innerHTML = (rats.hours<10?'0':'') + ratsHours + ":" + (Number(rats.minutes)<10?'0':'')+ Number(rats.minutes);
+            break;
             case 1:
-                let goat = 43200 + 3600 + 6*incK;
+                let goat = 43200 + 6*incK;
                 goat = secondToHours(goat);
                 value.innerHTML = (goat.hours<10?'0':'')+ goat.hours + ":" +  (incKMinutes + Number(goat.minutes));
             break;
@@ -332,7 +336,7 @@ function calcRubberStartTime(data, latitude, longitude, midnight = 0, noon = 12)
                     let Bull = 0 + 3600 + 6*incK;
                     Bull = secondToHours(Bull,incKMinutes);
                     let BullHours = +Bull.hours - 1;
-                    value.innerHTML = (Bull.hours<10?'0':'') + BullHours + ":" +  Number(Bull.minutes);
+                    value.innerHTML = (Bull.hours<10?'0':'') + BullHours + ":" + (Number(Bull.minutes)<10?'0':'')+ Number(Bull.minutes);
             break;
             case 6:
                     let Rabbit  = 0 + 3600*5 + 20*incK;
@@ -353,10 +357,10 @@ function calcRubberStartTime(data, latitude, longitude, midnight = 0, noon = 12)
                 value.innerHTML = (Dragon.hours<10?'0':'') + DragonHours + ":" +  (incKMinutes + Number(Dragon.minutes));
             break;
             case 9:
-                    let pig  = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 3*3600 + 6*Math.abs(incK);
-                    pig = secondToHours(pig,incKMinutes);
-                    let pigHours = +pig.hours;
-                    value.innerHTML = (pig.hours<10?'0':'') + pigHours + ":" + Number(pig.minutes);
+                let pig  = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 3*3600 + 6*Math.abs(incK);
+                pig = secondToHours(pig,incKMinutes);
+                let pigHours = +pig.hours;
+                value.innerHTML = (pig.hours<10?'0':'') + pigHours + ":" + (Number(pig.minutes)<10?'0':'')+ Number(pig.minutes);
             break;
             case 10:
                 let Snake = ((sunrise.getHours()*60 + sunrise.getMinutes())*60) + 3*3600 + 6*Math.abs(incK);
@@ -368,22 +372,149 @@ function calcRubberStartTime(data, latitude, longitude, midnight = 0, noon = 12)
                     let horse = ((sunrise.getHours()*60 + sunrise.getMinutes())*60) + 5*3600 + 15*Math.abs(incK);
                     horse = secondToHours(horse,incKMinutes);
                     let horseHours = +horse.hours - 3;
-                    value.innerHTML = (horseHours < 10?'0':'') + horseHours + ":" +  Number(horse.minutes);
+                    value.innerHTML = (horseHours < 10?'0':'') + horseHours + ":" +  (Number(horse.minutes)<10?'0':'')+ Number(horse.minutes);
             break;
             default:
                 value.innerHTML = "--:--" ;
           }
     });
 
+}
 
+function calcRubberEndTime(data, latitude, longitude, midnight = 0, noon = 12){
 
-    console.log();
+    let sunset = new Date().sunset(+latitude, +longitude);
+    let sunrise = new Date().sunrise(+latitude, +longitude);
+    
+    let lenghtDay = Math.trunc((sunset - sunrise)/1000);
+
+    let lenghtNight = 86400 - lenghtDay;
+
+    let diffDayNight = lenghtDay - lenghtNight;
+
+    let incK =  Math.round(diffDayNight / 84);
+
+    let incKMinutes = incK/60 - Math.trunc(incK/60);
+
+    if(Math.abs(incKMinutes*100) > 60){
+        incKMinutes = Math.trunc(Math.abs(incKMinutes*100) - 60);
+        if(incK > 0){
+            incK = incK + 60;
+        }else{
+            incK = incK - 60;
+        }
+    }else{
+        incKMinutes = Math.trunc(Math.abs(incKMinutes*100));
+    }
+
+    data.forEach((value, index) => { 
+        switch (index) {
+            case 0: 
+            let rats = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 7*3600 + 15*Math.abs(incK);
+            rats = secondToHours(rats,incKMinutes);
+            let ratsHours = (+rats.hours<=24?0:+rats.hours);
+            value.innerHTML = (ratsHours<10?'0':'') + ratsHours + ":" + (Number(rats.minutes)<10?'0':'')+ Number(rats.minutes);
+            break;
+            case 1:
+                let goat = 43200 + 6*incK;
+                goat = secondToHours(goat);
+                let goatHours = +goat.hours + 2;
+                value.innerHTML = (goat.hours<10?'0':'')+ goatHours + ":" +  (incKMinutes + Number(goat.minutes));
+            break;
+            case 3:
+                let Monkey  = 43200 + 10800 + 15*incK;
+                Monkey = secondToHours(Monkey);
+                let monkeyHours = +Monkey.hours + 2;
+                value.innerHTML = (Monkey.hours<10?'0':'')+ monkeyHours + ":" +  (incKMinutes + Number(Monkey.minutes));
+            break;
+            case 5:
+                let Rooster = 43200 + 3600*5 + 20*incK;
+                Rooster = secondToHours(Rooster);
+                let roosterHours = +Rooster.hours + 2;
+                value.innerHTML = (Rooster.hours<10?'0':'') + roosterHours + ":" +  (incKMinutes + Number(Rooster.minutes));
+            break; 
+            case 4:
+                let Tiger = 0 + 3600*3 + 15*incK;
+                Tiger = secondToHours(Tiger);
+                let TigerHours = +Tiger.hours + 2;
+                value.innerHTML = (Tiger.hours<10?'0':'') + TigerHours + ":" +  (incKMinutes + Number(Tiger.minutes));
+            break;
+            case 2:
+                    let Bull = 0 + 3600 + 6*incK;
+                    Bull = secondToHours(Bull,incKMinutes);
+                    let BullHours = +Bull.hours+1;
+                    value.innerHTML = (Bull.hours<10?'0':'') + BullHours + ":" + (Number(Bull.minutes)<10?'0':'')+ Number(Bull.minutes);
+            break;
+            case 6:
+                    let Rabbit  = 0 + 3600*5 + 20*incK;
+                    Rabbit = secondToHours(Rabbit);
+                    let RabbitHours = +Rabbit.hours + 2;
+                    value.innerHTML = (Rabbit.hours<10?'0':'') + RabbitHours + ":" +  (incKMinutes + Number(Rabbit.minutes));
+            break;
+            case 7:
+                    let dog  = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 3600 + incK;
+                    dog = secondToHours(dog);
+                    let dogHours = +dog.hours + 2;
+                    value.innerHTML = (dog.hours<10?'0':'') + dogHours + ":" +  (incKMinutes + Number(dog.minutes));
+            break;
+            case 8:
+                let Dragon = ((sunrise.getHours()*60 + sunrise.getMinutes())*60) + 3600 + incK;
+                Dragon = secondToHours(Dragon);
+                let DragonHours = +Dragon.hours;
+                value.innerHTML = (Dragon.hours<10?'0':'') + DragonHours + ":" +  (incKMinutes + Number(Dragon.minutes));
+            break;
+            case 9:
+                let pig  = ((sunset.getHours()*60 + sunset.getMinutes())*60) + 3*3600 + 6*Math.abs(incK);
+                pig = secondToHours(pig,incKMinutes);
+                let pigHours = +pig.hours + 2;
+                value.innerHTML = (pig.hours<10?'0':'') + pigHours + ":" + (Number(pig.minutes)<10?'0':'')+ Number(pig.minutes);
+            break;
+            case 10:
+                let Snake = ((sunrise.getHours()*60 + sunrise.getMinutes())*60) + 3*3600 + 6*Math.abs(incK);
+                Snake = secondToHours(Snake,incKMinutes);
+                let SnakeHours = +Snake.hours;
+                value.innerHTML = (SnakeHours < 10?'0':'') + SnakeHours + ":" +  Number(Snake.minutes);
+            break;
+            case 12:
+                    let horse = ((sunrise.getHours()*60 + sunrise.getMinutes())*60) + 5*3600 + 15*Math.abs(incK);
+                    horse = secondToHours(horse,incKMinutes);
+                    let horseHours = +horse.hours - 1;
+                    value.innerHTML = (horseHours < 10?'0':'') + horseHours + ":" +  (Number(horse.minutes)<10?'0':'')+ Number(horse.minutes);
+            break;
+            default:
+                value.innerHTML = "--:--" ;
+        }
+    });
+
+}
+
+function calcSovTime(dataSov,dataSov2,dataSun, dataRubber){
+    dataSov.forEach((value, index)=>{
+        if(index%2 == 0){
+            value.innerHTML = dataSun[index].innerText;
+        }else{
+            value.innerHTML = dataSun[index].innerText;
+        }
+    });
+
+    dataSov2.forEach((value, index)=>{
+        if(index%2 == 0){
+            value.innerHTML = dataRubber[index].innerText;
+        }else{
+            value.innerHTML = dataRubber[index].innerText;
+        }
+    });
 
 }
 
 
 /* Конец расчета*/
 
+document.getElementById('clear').addEventListener('click', () =>{
+    tableResult.style.display = "none";
+    elementMenuItem.style.display = 'none';
+    titleText.style.display = "block";
+});
 
 var city = '';
 
@@ -439,7 +570,6 @@ function init(){
     });
 
     sum.addEventListener('click', (event) => {
-
         tableResult.style.display = "block";
         titleText.style.display = "none";
         elementMenuItem.style.display = 'flex';
@@ -448,86 +578,10 @@ function init(){
         calcSunEndTime(result2);
 
         calcRubberStartTime(resultR,document.getElementById('lat').value, document.getElementById('lon').value);
+        calcRubberEndTime(resultR2,document.getElementById('lat').value, document.getElementById('lon').value);
 
-
-        // resultS.forEach((value, index) => { 
-        //     if(index%2 == 0){
-        //         if(index == 0){
-        //             let hour = Number(elementUtc.options[elementUtc.selectedIndex].value);
-        //             value.innerHTML = Math.abs(hour) + ":00" ;
-        //         }else if(index == 10){
-        //             value.innerHTML = "--:--" ;
-        //         }else{
-        //             let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value);
-        //             theHours.setHours(h);
-        //             value.innerHTML = theHours.getHours() + ":00";
-        //         }
-        //     }else{
-        //         if(index == 11){
-        //             value.innerHTML = "--:--" ;
-        //         }else if(index == 9){
-        //             value.innerHTML = "--:--" ;
-        //         }else {
-        //             let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value);
-        //             theHours.setHours(h);
-        //             value.innerHTML =  theHours.getHours() + ":00";
-        //         }
-                    
-        //     }
-        // });
-
-        // resultS2.forEach((value, index) => { 
-        //     if(index%2 == 0){
-        //         if(index == 0){
-        //             let hour = Number(elementUtc.options[elementUtc.selectedIndex].value);
-        //             value.innerHTML = Math.abs(hour) + ":41" ;
-        //         }else if(index == 10){
-        //             value.innerHTML = "--:--" ;
-        //         }else{
-        //             let h = (index - 2 + sunDay) - 1 + Number(elementUtc.options[elementUtc.selectedIndex].value)+1;
-        //             theHours.setHours(h);
-        //             value.innerHTML = theHours.getHours() + ":00";
-        //         }
-        //     }else{
-        //         if(index == 11){
-        //             value.innerHTML = "--:--" ;
-        //         }else if(index == 9){
-        //             value.innerHTML = "--:--" ;
-        //         }else {
-        //             let h = (index + sunDay) + 10 + Number(elementUtc.options[elementUtc.selectedIndex].value) +1;
-        //             theHours.setHours(h);
-        //             value.innerHTML =  theHours.getHours() + ":00";
-        //         }
-                    
-        //     }
-        // });
-
-        // var myGeocoder = ymaps.geocode(elementCity.value);
-
-        // myGeocoder.then(
-        //     function (res) {
-        //         coordinates = res.geoObjects.get(0).geometry.getCoordinates();
-
-        //         var myPlacemark = new ymaps.GeoObject({
-        //             geometry: {
-        //                 type: "Point",
-        //                 coordinates: res.geoObjects.get(0).geometry.getCoordinates()
-        //             }
-        //         });
-
-        //         myMap.geoObjects.add(myPlacemark);
-        //         myMap.setCenter(myPlacemark.geometry.getCoordinates());
-
-        //         document.getElementById('lat').value = coordinates[0];
-        //         document.getElementById('lon').value = coordinates[1];
-        //     },
-        //     function (err) {
-        //         alert('Ошибка');
-        //     }
-        // );
-
+        calcSovTime(resultS,resultS2, result, resultR2);
     });
-    
-        
+       
 }
 
