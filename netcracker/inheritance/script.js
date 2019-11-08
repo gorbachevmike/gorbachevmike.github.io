@@ -39,7 +39,7 @@ Figure.prototype.draw = function (nameFigure,x,y,h,w,color) {
 
 function inherit(parentClass) {
     function ChildClass(){}
-    ChildClass.prototype = {...parentClass.prototype};
+    ChildClass.prototype = Object.create(parentClass.prototype);
     ChildClass.prototype.constructor = ChildClass;
     ChildClass.prototype._super = parentClass.prototype;
     return ChildClass;
